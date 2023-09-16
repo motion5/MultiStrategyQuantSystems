@@ -1,15 +1,24 @@
-import pandas as pd
 import quantlib.general_uitls as gu
-import quantlib.data as data
 
-#df, instruments = data.get_sp500_df()
-#df = data.extend_dataframe(instruments, df) 
-#gu.save_file("./Data/data.obj", (df, instruments))
-#gu.save_file("./Data/data.obj", (df, instruments))
+from dateutil.relativedelta import relativedelta
+
+from subsystems.LBMOM.subsys import Libmom
 
 df, instruments = gu.load_file("./Data/data.obj")
 print(df, instruments)
 
-# We will straight into implementing a stragegy, we call this LBMOM for long biased momentum
-# We call the other LSMOM for Long short momentum
+# run simulation for 5 years
+VOL_TARGET = 0.20
+print(df.index[-1])  # date today: 2023-09-14
+sim_start = df.index[-1] - relativedelta(years=5)
+print(sim_start)
 
+
+strat = Libmom(
+    instruments_config="./subsystems/LBMOM/config.json",
+    historical_df=df,
+    simulation_start=sim_start,
+    vol_target=VOL_TARGET,
+)
+
+strat.get_subsys_pos()
