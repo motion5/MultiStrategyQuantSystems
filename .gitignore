@@ -161,3 +161,9 @@ cython_debug/
 
 ## MacOS
 .DS_Store
+.vscode
+
+**/tests/**/*.csv
+**/tests/**/*.xlsx
+**/Data/*.csv
+**/Data/*.xlsx

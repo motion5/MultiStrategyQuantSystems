@@ -1,5 +1,6 @@
 import pickle
 
+
 def save_file(path, obj):
     try:
         with open(path, "wb") as fp:
@@ -7,6 +8,7 @@ def save_file(path, obj):
     except Exception as e:
         print(e)
         raise e
+
 
 def load_file(path):
     try:
